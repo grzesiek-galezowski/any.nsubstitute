@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TddXt.TypeReflection.Interfaces
+namespace TddXt.Any.TypeReflection.Interfaces
 {
   public interface IPropertyWrapper
   {

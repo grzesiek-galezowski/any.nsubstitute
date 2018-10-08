@@ -13,8 +13,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AnyExtensibility\AnyExtensibility.csproj" />
-    <ProjectReference Include="..\AutoFixtureWrapper\AutoFixtureWrapper.csproj" />
     <ProjectReference Include="..\TypeReflection\TypeReflection.csproj" />
-    <ProjectReference Include="..\TypeResolution\TypeResolution.csproj" />
   </ItemGroup>
 </Project>

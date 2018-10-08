@@ -1,8 +1,9 @@
 using NSubstitute;
 using TddXt.AnyExtensibility;
+using TddXt.CommonTypes;
 using TddXt.TypeReflection;
 
-namespace TddXt.AnyGenerators.NSubstitute
+namespace TddXt.Any.NSubstitute
 {
   public class SubstituteGenerator<T> : InlineGenerator<T> where T : class
   {
@@ -12,7 +13,7 @@ namespace TddXt.AnyGenerators.NSubstitute
       var type = typeof(T);
       var sub = Substitute.For<T>();
 
-      var methods = SmartType.For(type).GetAllPublicInstanceMethodsWithReturnValue();
+      var methods = LolSmartType.For(type).GetAllPublicInstanceMethodsWithReturnValue();
 
       foreach (var method in methods)
       {
@@ -23,4 +24,13 @@ namespace TddXt.AnyGenerators.NSubstitute
       return sub;
     }
   }
+
+  public static class AnyNSubstituteExtensions
+  {
+    public static T Substitute<T>(this BasicGenerator gen) where T : class
+    {
+      return gen.InstanceOf(new SubstituteGenerator<T>());
+    }
+  }
+
 }

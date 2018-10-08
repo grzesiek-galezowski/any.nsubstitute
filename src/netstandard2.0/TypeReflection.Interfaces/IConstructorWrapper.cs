@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using TddXt.AnyExtensibility;
+using TddXt.CommonTypes;
 
-namespace TddXt.TypeReflection.Interfaces
+namespace TddXt.Any.TypeReflection.Interfaces
 {
   public interface IConstructorWrapper
   {

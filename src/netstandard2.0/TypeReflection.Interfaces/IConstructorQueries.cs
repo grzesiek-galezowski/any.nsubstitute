@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using TddXt.CommonTypes;
+using TddXt.Any.Substitute.CommonTypes;
 
-namespace TddXt.TypeReflection.Interfaces
+namespace TddXt.Any.TypeReflection.Interfaces
 {
   public interface IConstructorQueries
   {

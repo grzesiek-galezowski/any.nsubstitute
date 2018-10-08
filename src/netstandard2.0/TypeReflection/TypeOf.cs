@@ -9,7 +9,7 @@ namespace TddXt.TypeReflection
 
     static TypeOf()
     {
-      Type = SmartType.For(typeof (T));
+      Type = LolSmartType.For(typeof (T));
     }
 
     public static bool HasParameterlessConstructor()

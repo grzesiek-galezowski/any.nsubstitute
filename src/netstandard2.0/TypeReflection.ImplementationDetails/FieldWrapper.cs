@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Reflection;
-using TddXt.TypeReflection.Interfaces;
+using TddXt.Any.TypeReflection.Interfaces;
 
-namespace TddXt.TypeReflection.ImplementationDetails
+namespace TddXt.Any.TypeReflection.ImplementationDetails
 {
   public class FieldWrapper : IFieldWrapper
   {

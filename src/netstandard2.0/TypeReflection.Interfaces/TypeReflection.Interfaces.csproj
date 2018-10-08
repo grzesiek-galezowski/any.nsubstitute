@@ -10,7 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AnyExtensibility\AnyExtensibility.csproj" />
+    <PackageReference Include="Any" Version="2.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CommonTypes\CommonTypes.csproj" />
   </ItemGroup>
 

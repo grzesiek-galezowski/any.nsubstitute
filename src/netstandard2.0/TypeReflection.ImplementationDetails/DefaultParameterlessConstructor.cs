@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using TddXt.Any.TypeReflection.Interfaces;
 using TddXt.AnyExtensibility;
-using TddXt.TypeReflection.Interfaces;
+using TddXt.CommonTypes;
 
 namespace TddXt.TypeReflection.ImplementationDetails
 {

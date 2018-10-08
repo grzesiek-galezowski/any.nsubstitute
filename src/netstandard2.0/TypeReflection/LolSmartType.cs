@@ -15,13 +15,13 @@ namespace TddXt.TypeReflection
     IEnumerable<IConstructorWrapper> FactoryMethods();
   }
 
-  public class SmartType : ISmartType
+  public class LolSmartType : ISmartType
   {
     private readonly ConstructorRetrieval _constructorRetrieval;
     private readonly Type _type;
     private readonly TypeInfo _typeInfo;
 
-    public SmartType(Type type, ConstructorRetrieval constructorRetrieval)
+    public LolSmartType(Type type, ConstructorRetrieval constructorRetrieval)
     {
       _type = type;
       _constructorRetrieval = constructorRetrieval;
@@ -200,7 +200,7 @@ namespace TddXt.TypeReflection
 
     public static ISmartType For(Type type)
     {
-      return new SmartType(type, new ConstructorRetrievalFactory().Create());
+      return new LolSmartType(type, new ConstructorRetrievalFactory().Create());
     }
 
     private List<IConstructorWrapper> TryToObtainNonPublicConstructors(Func<ConstructorInfo, bool> accessCriteria)
