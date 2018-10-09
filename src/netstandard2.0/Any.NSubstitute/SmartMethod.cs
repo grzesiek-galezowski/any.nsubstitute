@@ -1,9 +1,8 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using TddXt.TypeReflection.Interfaces;
 
-namespace TddXt.TypeReflection
+namespace TddXt.Any.NSubstitute
 {
   public class SmartMethod : IMethod
   {

@@ -1,7 +1,6 @@
 using NSubstitute;
 using TddXt.AnyExtensibility;
 using TddXt.CommonTypes;
-using TddXt.TypeReflection;
 
 namespace TddXt.Any.NSubstitute
 {
@@ -13,7 +12,7 @@ namespace TddXt.Any.NSubstitute
       var type = typeof(T);
       var sub = Substitute.For<T>();
 
-      var methods = LolSmartType.For(type).GetAllPublicInstanceMethodsWithReturnValue();
+      var methods = SmartType.For(type).GetAllPublicInstanceMethodsWithReturnValue();
 
       foreach (var method in methods)
       {

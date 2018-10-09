@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TddXt.Any.Substitute.CommonTypes
+namespace TddXt.Any.NSubstitute
 {
   public static class Maybe
   {

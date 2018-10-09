@@ -5,6 +5,6 @@
     <AssemblyOriginatorKeyFile>CommonTypes.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
     <AssemblyName>TddXt.CommonTypes</AssemblyName>
-    <RootNamespace>TddXt.CommonTypes</RootNamespace>
+    <RootNamespace>TddXt.Lolek.CommonTypes</RootNamespace>
   </PropertyGroup>
 </Project>

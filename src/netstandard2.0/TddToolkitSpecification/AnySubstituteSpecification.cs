@@ -1,8 +1,7 @@
 using NSubstitute;
 using NUnit.Framework;
 using TddToolkitSpecification.Fixtures;
-using TddXt.Any.NSubstitute;
-using TddXt.AnyRoot.Strings;
+using TddXt.AnyRoot.NSubstitute;
 using static TddXt.AnyRoot.Root;
 
 namespace TddToolkitSpecification
@@ -70,23 +69,6 @@ namespace TddToolkitSpecification
       instance.Nested.Returns(anotherInstance);
 
       Assert.AreEqual(anotherInstance, instance.Nested);
-    }
-
-    [Test]
-    public void ShouldBeAbleToBypassStaticCreationMethodWhenConstructorIsInternal()
-    {
-      Assert.DoesNotThrow(() => Any.Instance<FileExtension>());
-      Assert.DoesNotThrow(() => Any.Instance<FileName>());
-    }
-
-
-    [Test]
-    public void ShouldGenerateStringsContainingOtherObjects()
-    {
-      StringAssert.Contains("lol", Any.StringContaining("lol"));
-      StringAssert.Contains("lol", Any.StringContaining<string>("lol"));
-      StringAssert.Contains("2", Any.StringContaining(2));
-      StringAssert.Contains("C", Any.StringContaining('C'));
     }
   }
 }

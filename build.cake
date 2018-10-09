@@ -19,16 +19,8 @@ var netstandard20 = new Framework("netstandard2.0");
 // DEPENDENCIES
 //////////////////////////////////////////////////////////////////////
 
-var castleCore = new[] {"Castle.Core", "4.3.1"};
+var any = new[] {"Any", "2.1.3"};
 var nSubstitute = new[] {"NSubstitute", "3.1.0"};
-var autoFixtureSeed = new[] {"AutoFixture.SeedExtensions", "4.5.0"};
-var autoFixture = new[] {"AutoFixture", "4.5.0"};
-var autoFixture3510 = new[] {"AutoFixture", "3.51.0"};
-var fluentAssertions = new[] {"FluentAssertions", "5.4.2"};
-
-var taskExtensions = new[] {"System.Threading.Tasks.Extensions", "4.5.1"};
-var valueTuple = new[] {"System.ValueTuple", "4.5.0"};
-
 
 //////////////////////////////////////////////////////////////////////
 // PREPARATION
@@ -42,13 +34,13 @@ var specificationDir = Directory("./specification") + Directory(configuration);
 var buildNetStandardDir = buildDir + Directory("netstandard2.0");
 var publishNetStandardDir = publishDir + Directory("netstandard2.0");
 var srcNetStandardDir = srcDir + Directory("netstandard2.0");
-var slnNetStandard = srcNetStandardDir + File("Any.sln");
+var slnNetStandard = srcNetStandardDir + File("Any.NSubstitute.sln");
 var specificationNetStandardDir = specificationDir + Directory("netstandard2.0");
 var buildNet45Dir = buildDir + Directory("net45");
 var publishNet45Dir = publishDir + Directory("net45");
 var srcNet45Dir = srcDir + Directory("net45");
 var specificationNet45Dir = specificationDir + Directory("netstandard2.0");
-var slnNet45 = srcNet45Dir + File("Any.sln");
+var slnNet45 = srcNet45Dir + File("Any.NSubstitute.sln");
 
 GitVersion nugetVersion = null; 
 
@@ -158,22 +150,22 @@ Task("Pack")
     .Does(() => 
     {
 		CopyDirectory(buildDir, publishDir);
-		BundleDependencies(publishNetStandardDir, "TddXt.AnyRoot.dll");
-		BundleDependencies(publishNet45Dir, "TddXt.AnyRoot.dll");
-		NuGetPack("./Any.nuspec", new NuGetPackSettings()
+		BundleDependencies(publishNetStandardDir, "TddXt.Any.NSubstitute.dll");
+		BundleDependencies(publishNet45Dir, "TddXt.Any.NSubstitute.dll");
+		NuGetPack("./Any.NSubstitute.nuspec", new NuGetPackSettings()
 		{
-			Id = "Any",
-			Title = "Any",
+			Id = "Any.NSubstitute",
+			Title = "Any.NSubstitute",
 			Owners = new [] { "Grzegorz Galezowski" },
 			Authors = new [] { "Grzegorz Galezowski" },
-			Summary = "Anonymous value generator, supporting the 'Any.Whatever()' syntax proposed on the www.sustainabletdd.com blog.",
-			Description = "Anonymous value generator, supporting the 'Any.Whatever()' syntax proposed on the www.sustainabletdd.com blog. It makes use of the static usings and extension methods to achieve flexibility and extensibility.",
+			Summary = "Extension to Any library that allows generation of pre-canned substitutes using NSubstitute",
+			Description = "Extension to Any library that allows generation of pre-canned substitutes using NSubstitute.",
 			Language = "en-US",
-			ReleaseNotes = new[] {"Fixed multithreading errors under xUnit.NET"},
-			ProjectUrl = new Uri("https://github.com/grzesiek-galezowski/any"),
+			ReleaseNotes = new[] {"Initial version"},
+			ProjectUrl = new Uri("https://github.com/grzesiek-galezowski/any.nsubstitute"),
 			OutputDirectory = "./nuget",
-      LicenseUrl = new Uri("https://raw.githubusercontent.com/grzesiek-galezowski/any/master/LICENSE"),
-			Version = nugetVersion.NuGetVersionV2, //"2.1.3",
+      LicenseUrl = new Uri("https://raw.githubusercontent.com/grzesiek-galezowski/any.nsubstitute/master/LICENSE"),
+			Version = nugetVersion.NuGetVersionV2,
       Symbols = false,
 			Files = new [] 
 			{

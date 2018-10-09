@@ -6,15 +6,11 @@
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>TypeReflection.Interfaces.snk</AssemblyOriginatorKeyFile>
     <AssemblyName>TddXt.TypeReflection.Interfaces</AssemblyName>
-    <RootNamespace>TddXt.TypeReflection.Interfaces</RootNamespace>
+    <RootNamespace>TddXt.Lolek.TypeReflection.Interfaces</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Any" Version="2.1.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\CommonTypes\CommonTypes.csproj" />
   </ItemGroup>
 
 </Project>
