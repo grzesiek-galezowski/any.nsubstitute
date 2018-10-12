@@ -136,7 +136,7 @@ public void BundleDependencies(DirectoryPath specificVersionPublishDir, string r
 		new ILRepackSettings 
 		{ 
 			Parallel = true,
-			Keyfile = "./src/netstandard2.0/AnyRoot/TddToolkit.snk",
+			Keyfile = "./src/TddToolkit.snk",
 			DelaySign = false,
       CopyAttrs = true,
 			NDebug = false
@@ -176,28 +176,14 @@ Task("Pack")
 
 			Dependencies = new [] 
 			{
-				netstandard20.Dependency(castleCore),
-				netstandard20.Dependency(nSubstitute),
-				netstandard20.Dependency(autoFixtureSeed),
-				netstandard20.Dependency(autoFixture),
-				netstandard20.Dependency(fluentAssertions),
-				netstandard20.Dependency(taskExtensions),
-				netstandard20.Dependency(valueTuple),
+				netstandard20.Dependency(any),
+        netstandard20.Dependency(nSubstitute),
 
-				net462.Dependency(castleCore),
+				net462.Dependency(any),
 				net462.Dependency(nSubstitute),
-				net462.Dependency(autoFixtureSeed),
-				net462.Dependency(autoFixture),
-				net462.Dependency(fluentAssertions),
-				net462.Dependency(taskExtensions),
-				net462.Dependency(valueTuple),
 
-				net45.Dependency(castleCore),
-				net45.Dependency(nSubstitute),
-				net45.Dependency(autoFixture3510),
-				net45.Dependency(fluentAssertions),
-				net45.Dependency(taskExtensions),
-				net45.Dependency(valueTuple),
+				net45.Dependency(any),
+        net45.Dependency(nSubstitute),
 			}
 
 		});  
