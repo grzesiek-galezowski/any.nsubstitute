@@ -86,7 +86,8 @@ Task("Clean")
 {
     CleanDirectory(buildDir);
     CleanDirectory(publishDir);
-	CleanDirectory("./nuget");
+    CleanDirectory(specificationDir);
+	  CleanDirectory("./nuget");
 });
 
 Task("Restore-NuGet-Packages")
