@@ -1,7 +1,6 @@
 using NSubstitute;
 using NUnit.Framework;
-using TddToolkitSpecification.Fixtures;
-using TddXt.AnyRoot.NSubstitute;
+using TddXt.Any.NSubstitute;
 using static TddXt.AnyRoot.Root;
 
 namespace TddToolkitSpecification
