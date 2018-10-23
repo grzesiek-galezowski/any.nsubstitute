@@ -19,7 +19,7 @@ var netstandard20 = new Framework("netstandard2.0");
 // DEPENDENCIES
 //////////////////////////////////////////////////////////////////////
 
-var any = new[] {"Any", "2.1.3"};
+var any = new[] {"Any", "3.0.0"};
 var nSubstitute = new[] {"NSubstitute", "3.1.0"};
 
 //////////////////////////////////////////////////////////////////////
@@ -130,7 +130,7 @@ Task("Run-Unit-Tests")
 public void BundleDependencies(DirectoryPath specificVersionPublishDir, string rootDllName)
 {
 	var fullRootDllFilePath = specificVersionPublishDir + "/" + rootDllName;
-	var assemblyPaths = GetFiles(specificVersionPublishDir + "/TddXt*.dll");
+	var assemblyPaths = GetFiles(specificVersionPublishDir + "/TddXt.Any.NSubstitute*.dll");
 	var mainAssemblyPath = new FilePath(fullRootDllFilePath).MakeAbsolute(Context.Environment);
 	assemblyPaths.Remove(mainAssemblyPath);
 	ILRepack(fullRootDllFilePath, fullRootDllFilePath, assemblyPaths, 
