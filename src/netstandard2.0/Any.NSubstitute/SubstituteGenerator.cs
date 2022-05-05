@@ -1,13 +1,11 @@
 using NSubstitute;
 using TddXt.AnyExtensibility;
-using TddXt.CommonTypes;
 
 namespace TddXt.Any.NSubstitute
 {
   public class SubstituteGenerator<T> : InlineGenerator<T> where T : class
   {
-    //todo move substitute generator to a separate nuget project
-    public T GenerateInstance(InstanceGenerator instanceGenerator, GenerationTrace trace) 
+    public T GenerateInstance(InstanceGenerator instanceGenerator, GenerationRequest request)
     {
       var type = typeof(T);
       var sub = Substitute.For<T>();
@@ -16,20 +14,11 @@ namespace TddXt.Any.NSubstitute
 
       foreach (var method in methods)
       {
-        method.InvokeWithAnyArgsOn(sub, argType => instanceGenerator.Instance(argType, trace))
-          .ReturnsForAnyArgs(method.GenerateAnyReturnValue(returnType => instanceGenerator.Instance(returnType, trace)));
+        method.InvokeWithAnyArgsOn(sub, argType => instanceGenerator.Instance(argType, request))
+          .ReturnsForAnyArgs(method.GenerateAnyReturnValue(returnType => instanceGenerator.Instance(returnType, request)));
       }
 
       return sub;
     }
   }
-
-  public static class AnyNSubstituteExtensions
-  {
-    public static T Substitute<T>(this BasicGenerator gen) where T : class
-    {
-      return gen.InstanceOf(new SubstituteGenerator<T>());
-    }
-  }
-
 }
