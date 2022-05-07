@@ -292,3 +292,4 @@ specification/
 nuget/
 specification.net.framework/
 nuget.net.framework/
+*.ncrunchsolution
