@@ -1,5 +1,6 @@
 ﻿using AtmaFileSystem;
 using AtmaFileSystem.IO;
+using DotnetExeCommandLineBuilder;
 using static Bullseye.Targets;
 using static DotnetExeCommandLineBuilder.DotnetExeCommands;
 using static SimpleExec.Command;
@@ -7,10 +8,10 @@ using static SimpleExec.Command;
 var configuration = "Release";
 
 // Define directories.
-var root = AbsoluteFilePath.OfThisFile().ParentDirectory(3).Value();
+var root = AbsoluteFilePath.OfThisFile().ParentDirectory(2).Value();
 var srcDir = root.AddDirectoryName("src");
 var nugetPath = root.AddDirectoryName("nuget");
-var version="8.0.0";
+var version="0.2.0";
 
 if (!nugetPath.Exists())
 {
@@ -23,49 +24,46 @@ if (!nugetPath.Exists())
 void Pack(AbsoluteDirectoryPath outputPath, AbsoluteDirectoryPath rootSourceDir, string projectName)
 {
   Run("dotnet",
-    $"pack" +
-    $" -c {configuration}" +
-    $" --include-symbols" +
-    $" --no-build" +
-    $" -p:SymbolPackageFormat=snupkg" +
-    $" -p:VersionPrefix={version}" +
-    $" -o {outputPath}",
-    workingDirectory: rootSourceDir.AddDirectoryName(projectName).ToString());
+    DotnetExeCommands.Pack()
+      .Configuration(configuration)
+      .IncludeSymbols()
+      .IncludeSource()
+      .NoBuild()
+      .WithArg("-p:SymbolPackageFormat=snupkg")
+      .WithArg($"-p:VersionPrefix={version}")
+      .Output(outputPath),
+    workingDirectory: rootSourceDir.ToString());
 }
 
-//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 // TASKS
 //////////////////////////////////////////////////////////////////////
 
 Target("Clean", () =>
 {
   nugetPath.Delete(true);
-  Run($"dotnet",
-    "clean " +
-    $"-c {configuration} ",
+  Run("dotnet", Clean().Configuration("Release"),
+    workingDirectory: srcDir.ToString());
+  Run("dotnet", Clean().Configuration("Debug"),
     workingDirectory: srcDir.ToString());
 });
 
 Target("Build", () =>
 {
-  Run($"dotnet",
-    "build " +
-    $"-c {configuration} " +
-    //$"-o {buildDir} " +
-    $"-p:VersionPrefix={version}",
+  Run("dotnet", Build().Configuration(configuration).WithArg($"-p:VersionPrefix={version}"),
     workingDirectory: srcDir.ToString());
 });
 
 Target("Test", DependsOn("Build"), () =>
 {
   Run("dotnet",
-    Test().NoBuild().Configuration(configuration).WithArg("-p:VersionPrefix", version),
+    Test().NoBuild().Configuration(configuration).WithArg($"-p:VersionPrefix={version}"),
     workingDirectory: srcDir.ToString());
 });
 
-Target("Pack", DependsOn("Test", (string) "NScan"), () =>
+Target("Pack", DependsOn("Test", (string) "Build"), () =>
 {
-  Pack(nugetPath, srcDir, "XFluentAssert");
+  Pack(nugetPath, srcDir, "Any.NSubstitite");
 });
 
 Target("Push", DependsOn("Clean", "Pack"), () =>
