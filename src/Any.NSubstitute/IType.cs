@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 
-namespace TddXt.Any.NSubstitute
+namespace TddXt.Any.NSubstitute;
+
+public interface IType
 {
-  public interface IType
-  {
-    IEnumerable<IMethod> GetAllPublicInstanceMethodsWithReturnValue();
-  }
+  IEnumerable<IMethod> GetAllPublicInstanceMethodsWithReturnValue();
 }

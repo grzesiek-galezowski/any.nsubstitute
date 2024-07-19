@@ -1,12 +1,11 @@
 using TddXt.AnyExtensibility;
 
-namespace TddXt.Any.NSubstitute
+namespace TddXt.Any.NSubstitute;
+
+public static class AnyNSubstituteExtensions
 {
-  public static class AnyNSubstituteExtensions
+  public static T Substitute<T>(this BasicGenerator gen) where T : class
   {
-    public static T Substitute<T>(this BasicGenerator gen) where T : class
-    {
-      return gen.InstanceOf(new SubstituteGenerator<T>());
-    }
+    return gen.InstanceOf(new SubstituteGenerator<T>());
   }
 }

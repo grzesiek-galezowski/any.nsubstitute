@@ -1,6 +1,6 @@
 ﻿* hasNoCircularUsings
 *Specification hasAttributesOn *Specification:Should*
-TddXt.XFluentAssert hasProperty TargetFramework:netstandard2.1
-*Specification hasProperty TargetFramework:net6.0
+TddXt.XFluentAssert hasProperty TargetFramework:net8.0
+*Specification hasProperty TargetFramework:net8.0
 * hasProperty Nullable:enable
 * hasProperty LangVersion:latest

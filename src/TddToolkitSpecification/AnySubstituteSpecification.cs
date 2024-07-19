@@ -1,73 +1,73 @@
 using NSubstitute;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using TddXt.Any.NSubstitute;
 using static TddXt.AnyRoot.Root;
 
-namespace TddToolkitSpecification
+namespace TddToolkitSpecification;
+
+public class AnySubstituteSpecification
 {
-  public class AnySubstituteSpecification
+  [Test]
+  public void ShouldBeAbleToWrapSubstitutesAndOverrideDefaultValues()
   {
-    [Test]
-    public void ShouldBeAbleToWrapSubstitutesAndOverrideDefaultValues()
-    {
-      //GIVEN
-      var instance = Any.Substitute<RecursiveInterface>();
+    //GIVEN
+    var instance = Any.Substitute<RecursiveInterface>();
 
-      //WHEN
-      var result = instance.Number;
+    //WHEN
+    var result = instance.Number;
 
-      //THEN
-      Assert.AreNotEqual(default(int), result);
-    }
+    //THEN
+    ClassicAssert.AreNotEqual(default(int), result);
+  }
 
-    [Test]
-    public void ShouldBeAbleToWrapSubstitutesAndNotOverrideStubbedValues()
-    {
-      //GIVEN
-      var instance = Any.Substitute<RecursiveInterface>();
-      instance.Number.Returns(44543);
+  [Test]
+  public void ShouldBeAbleToWrapSubstitutesAndNotOverrideStubbedValues()
+  {
+    //GIVEN
+    var instance = Any.Substitute<RecursiveInterface>();
+    instance.Number.Returns(44543);
 
-      //WHEN
-      var result = instance.Number;
+    //WHEN
+    var result = instance.Number;
 
-      //THEN
-      Assert.AreEqual(44543, result);
-    }
+    //THEN
+    ClassicAssert.AreEqual(44543, result);
+  }
 
-    [Test]
-    public void ShouldBeAbleToWrapSubstitutesAndStillAllowVerifyingCalls()
-    {
-      //GIVEN
-      var instance = Any.Substitute<RecursiveInterface>();
+  [Test]
+  public void ShouldBeAbleToWrapSubstitutesAndStillAllowVerifyingCalls()
+  {
+    //GIVEN
+    var instance = Any.Substitute<RecursiveInterface>();
 
-      //WHEN
-      instance.VoidMethod();
+    //WHEN
+    instance.VoidMethod();
 
-      //THEN
-      instance.Received(1).VoidMethod();
-    }
+    //THEN
+    instance.Received(1).VoidMethod();
+  }
 
-    [Test]
-    public void ShouldReturnNonNullImplementationsOfInnerObjects()
-    {
-      //GIVEN
-      var instance = Any.Substitute<RecursiveInterface>();
+  [Test]
+  public void ShouldReturnNonNullImplementationsOfInnerObjects()
+  {
+    //GIVEN
+    var instance = Any.Substitute<RecursiveInterface>();
 
-      //WHEN
-      var result = instance.Nested;
+    //WHEN
+    var result = instance.Nested;
 
-      //THEN
-      Assert.NotNull(result);
-    }
+    //THEN
+    ClassicAssert.NotNull(result);
+  }
 
-    [Test]
-    public void ShouldBeAbleToWrapSubstitutesAndSkipOverridingResultsStubbedWithNonDefaultValues()
-    {
-      var instance = Any.Substitute<RecursiveInterface>();
-      var anotherInstance = Substitute.For<RecursiveInterface>();
-      instance.Nested.Returns(anotherInstance);
+  [Test]
+  public void ShouldBeAbleToWrapSubstitutesAndSkipOverridingResultsStubbedWithNonDefaultValues()
+  {
+    var instance = Any.Substitute<RecursiveInterface>();
+    var anotherInstance = Substitute.For<RecursiveInterface>();
+    instance.Nested.Returns(anotherInstance);
 
-      Assert.AreEqual(anotherInstance, instance.Nested);
-    }
+    ClassicAssert.AreEqual(anotherInstance, instance.Nested);
   }
 }

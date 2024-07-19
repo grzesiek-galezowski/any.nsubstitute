@@ -2,31 +2,23 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace TddXt.Any.NSubstitute
+namespace TddXt.Any.NSubstitute;
+
+public class SmartMethod(MethodInfo methodInfo) : IMethod
 {
-  public class SmartMethod : IMethod
+  public object InvokeWithAnyArgsOn(object instance, Func<Type, object> valueFactory)
   {
-    private readonly MethodInfo _methodInfo;
+    var parameters = GenerateAnyValuesFor(valueFactory);
+    return methodInfo.Invoke(instance, parameters);
+  }
 
-    public SmartMethod(MethodInfo methodInfo)
-    {
-      _methodInfo = methodInfo;
-    }
+  public object GenerateAnyReturnValue(Func<Type, object> valueFactory)
+  {
+    return valueFactory.Invoke(methodInfo.ReturnType);
+  }
 
-    public object InvokeWithAnyArgsOn(object instance, Func<Type, object> valueFactory)
-    {
-      var parameters = GenerateAnyValuesFor(valueFactory);
-      return _methodInfo.Invoke(instance, parameters);
-    }
-
-    public object GenerateAnyReturnValue(Func<Type, object> valueFactory)
-    {
-      return valueFactory.Invoke(_methodInfo.ReturnType);
-    }
-
-    private object[] GenerateAnyValuesFor(Func<Type, object> valueFactory)
-    {
-      return _methodInfo.GetParameters().Select(p => p.ParameterType).Select(valueFactory).ToArray();
-    }
+  private object[] GenerateAnyValuesFor(Func<Type, object> valueFactory)
+  {
+    return methodInfo.GetParameters().Select(p => p.ParameterType).Select(valueFactory).ToArray();
   }
 }

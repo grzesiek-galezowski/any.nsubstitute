@@ -11,7 +11,7 @@ var configuration = "Release";
 var root = AbsoluteFilePath.OfThisFile().ParentDirectory(2).Value();
 var srcDir = root.AddDirectoryName("src");
 var nugetPath = root.AddDirectoryName("nuget");
-var version="0.2.0";
+var version="1.0.0";
 
 if (!nugetPath.Exists())
 {
