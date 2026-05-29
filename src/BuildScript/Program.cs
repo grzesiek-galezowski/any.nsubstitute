@@ -11,7 +11,7 @@ var configuration = "Release";
 var root = AbsoluteFilePath.OfThisFile().ParentDirectory(2).Value();
 var srcDir = root.AddDirectoryName("src");
 var nugetPath = root.AddDirectoryName("nuget");
-var version="1.0.0";
+const string version = "2.0.0";
 
 if (!nugetPath.Exists())
 {
@@ -54,19 +54,19 @@ Target("Build", () =>
     workingDirectory: srcDir.ToString());
 });
 
-Target("Test", DependsOn("Build"), () =>
+Target("Test", dependsOn: ["Build"], () =>
 {
   Run("dotnet",
     Test().NoBuild().Configuration(configuration).WithArg($"-p:VersionPrefix={version}"),
     workingDirectory: srcDir.ToString());
 });
 
-Target("Pack", DependsOn("Test", (string) "Build"), () =>
+Target("Pack", dependsOn: ["Test", "Build"], () =>
 {
   Pack(nugetPath, srcDir, "Any.NSubstitite");
 });
 
-Target("Push", DependsOn("Clean", "Pack"), () =>
+Target("Push", dependsOn: ["Clean", "Pack"], () =>
 {
     foreach (var nupkgPath in nugetPath.GetFiles("*.nupkg"))
     {
@@ -74,7 +74,6 @@ Target("Push", DependsOn("Clean", "Pack"), () =>
     }
 });
 
-Target("default", DependsOn("Pack"));
+Target("default", dependsOn: ["Pack"]);
 
 await RunTargetsAndExitAsync(args);
-

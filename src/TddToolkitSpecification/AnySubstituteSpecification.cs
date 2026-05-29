@@ -2,7 +2,7 @@ using NSubstitute;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 using TddXt.Any.NSubstitute;
-using static TddXt.AnyRoot.Root;
+using TddXt.AnyRoot;
 
 namespace TddToolkitSpecification;
 
